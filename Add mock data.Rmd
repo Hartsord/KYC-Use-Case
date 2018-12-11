@@ -1,0 +1,56 @@
+---
+title: "Untitled"
+output: github_document
+---
+## Setup the environment
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Documents/Work/Inoventik - local/RStudio/KYC-Use-Case-RStudio")
+library(readr)
+```
+
+### KYC Analysis proper
+
+## Load data
+
+First, we need to locate the data provided for analysis.
+
+```{r}
+input_loc <- "./inputs/"
+credit_file <- "credit_test.csv"
+```
+
+Now, let's load and look at the credit list:
+```{r}
+credit <- read.csv(paste0(input_loc, credit_file))
+str(credit)
+
+```
+
+## Prepare test data
+
+Let's extract the relevant columns, and see what the initial structure, values, and summary looks like. In this case, the pertinent columns are "Customer.Name" and "Date.of.Birth"
+
+```{r}
+credit <- credit[,c("Customer.Name","Date.of.Birth")]
+head(credit, 10)
+summary(credit)
+str(credit)
+```
+
+Now let's load the mock data
+
+```{r}
+file_loc <- "inputs/sample data raw/"
+mock_data <- read_csv(paste0(file_loc,"MOCK_DATA_10k_r.csv"))
+summary(mock_data)
+
+```
+
+Now let's combine the name fields into a full name field
+
+```{r}
+mock_data$fullname <- c(mock_data$last_name,", ",mock_data$first_name)
+```
+

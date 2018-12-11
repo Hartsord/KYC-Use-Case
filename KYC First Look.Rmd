@@ -1,0 +1,74 @@
+---
+title: "KYC First Look"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Documents/Work/Inoventik - local/RStudio/KYC-Use-Case-RStudio")
+```
+
+## KYC Lookup
+
+This is a report on accessing a file of KYC clients, and comparing them to the OFAC database to check if there are any matches.
+
+## Including Code
+
+This report includes the following packages:
+
+```{r cars}
+# include i_don't_know
+library(readr)
+```
+
+### KYC Analysis proper
+
+## Load data
+
+First, we need to locate the data provided for analysis.
+
+```{r}
+input_loc <- "./inputs/"
+screen_file <- "screening_list_consolidated_2018-12-04.csv"
+credit_file <- "credit_test.csv"
+```
+
+Let's load and look at the screening list:
+
+```{r}
+screen <- read.csv(paste0(input_loc, screen_file))
+str(screen)
+```
+
+Now, let's load and look at the credit list:
+```{r}
+credit <- read.csv(paste0(input_loc, credit_file))
+str(credit)
+
+```
+
+## Prepare screen data
+
+Now let's extract the important columns from the training CSV. For our purposes, these are the "name" column and the "dates_of_birth" column
+
+```{r}
+screen <- screen[,c("name","dates_of_birth")]
+head(screen, 10)
+summary(screen)
+str(screen)
+```
+
+Looking at the contents of the dates_of_birth field, we can see that it is in several date formats, which we will have to decide on later
+
+## Prepare test data
+
+Similar to the train, data, let's extract the relevant columns, and see what the initial structure, values, and summary looks like. In this case, the pertinent columns are "Customer.Name" and "Date.of.Birth"
+
+```{r}
+credit <- credit[,c("Customer.Name","Date.of.Birth")]
+head(credit, 10)
+summary(credit)
+str(credit)
+```
+
+For the credit test data, we can see that the names and dates of birth have all been removed, so we have to replace these with dummy data.
