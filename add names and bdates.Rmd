@@ -1,0 +1,60 @@
+---
+title: "Add names and dates"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+
+```
+
+## Sample data comibination
+
+Let's load up the first file
+
+```{r}
+file_loc <- "inputs/sample data raw/"
+MOCK_DATA <- read_csv(paste0(file_loc,"MOCK_DATA.csv"))
+summary(MOCK_DATA)
+
+```
+
+Let's continue adding the next file
+
+```{r}
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (1).csv")))
+summary(MOCK_DATA)
+
+```
+
+Let's add in all the other files
+
+```{r}
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (2).csv")))
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (3).csv")))
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (4).csv")))
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (5).csv")))
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (6).csv")))
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (7).csv")))
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (8).csv")))
+MOCK_DATA <- rbind(MOCK_DATA, read_csv(paste0(file_loc,"MOCK_DATA (9).csv")))
+summary(MOCK_DATA)
+head(MOCK_DATA)
+```
+
+We don't need the id column, so let's drop it
+
+```{r}
+MOCK_DATA$id <- NULL
+head(MOCK_DATA)
+```
+
+
+
+Let's write the new data frame to a file
+
+```{r}
+write_csv(MOCK_DATA,paste0(file_loc,"MOCK_DATA_10k_r.csv"))
+```
+
