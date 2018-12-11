@@ -51,6 +51,18 @@ summary(mock_data)
 Now let's combine the name fields into a full name field
 
 ```{r}
-mock_data$fullname <- c(mock_data$last_name,", ",mock_data$first_name)
+mock_data$fullname <- paste0(mock_data$last_name,", ",mock_data$first_name)
+str(mock_data$fullname)
 ```
+
+Let's put the mock data into our credit file
+
+```{r}
+credit$Customer.Name <- mock_data$fullname
+credit$Date.of.Birth <- mock_data$birth_date
+head(credit)
+summary(credit)
+str(credit)
+```
+
 
