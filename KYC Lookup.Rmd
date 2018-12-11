@@ -5,8 +5,7 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/Documents/Work/Inoventik - local/RStudio/KYC Lookup 2")
-# setwd("~/Documents/Work/Inoventik - local/RStudio/KYC Lookup")
+setwd("~/Documents/Work/Inoventik - local/RStudio/KYC-Use-Case-RStudio")
 ```
 
 ## KYC Lookup
